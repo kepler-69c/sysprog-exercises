@@ -1,0 +1,64 @@
+# MDR solution
+mdr.c
+
+# Build artifacts
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dll
+*.dylib
+*.exe
+*.out
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Build directories
+/build/
+/build-*/
+/bin/
+/dist/
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Coverage and profiling
+*.gcno
+*.gcda
+*.gcov
+*.prof
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Autotools
+autom4te.cache/
+aclocal.m4
+config.log
+config.status
+configure
+depcomp
+install-sh
+missing
+compile
+ltmain.sh
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
