@@ -1,5 +1,7 @@
 # MDR solution
 mdr.c
+*/test
+*/check
 
 # Build artifacts
 *.o
