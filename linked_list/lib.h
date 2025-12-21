@@ -33,7 +33,9 @@ static inline list_node_t *list_node_create(int value) {
   return node;
 }
 
-static inline void list_node_free(list_node_t *node) { free(node); }
+static inline void list_node_free(list_node_t *node) {
+  free(node);
+}
 
 static inline list_t *list_create() {
   list_t *list = (list_t *)malloc(sizeof(list_t));
