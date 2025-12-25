@@ -10,12 +10,12 @@ This repository contains a collection of systems programming exercises designed 
 | :--- | :--- | :--- | :--- |
 | [**LEA**](./lea) | Simulate the LEA x86 instruction. | 🟢 **Easy** | 7/10 |
 | [**Permission checker**](./permission_checker) | Validate permission of virtual memory accesses. | 🟢 **Easy** | 9/10 |
-| [**Compiler (Easy)**](./struct_compiler_easy) | Basic lexical analysis and simple expression parsing. | 🟢 **Easy** | 9/10 |
+| [**Struct Compiler (Easy)**](./struct_compiler_easy) | Compute offset and size for simple structs. | 🟢 **Easy** | 9/10 |
 | [**Vector**](./vector) | Implementation of a dynamic array (vector) with resizing logic. | 🟡 **Medium** | 6/10 |
 | [**Linked List**](./linked_list) | Basic pointer manipulation and node management for linear structures. | 🟡 **Medium** | 6/10 |
 | [**Backtrace**](./backtrace) | Manual x86_64 stack unwinding using frame pointers and debug symbols. | 🟡 **Medium** | 8/10 |
-| [**Slab Allocator**](./slab_allocator) | Efficient fixed-size object management with alignment and list transitions. | 🔴 **Hard** | 2/10 |
-| [**Compiler (Hard)**](./struct_compiler_hard) | Advanced logic, potentially involving code generation or complex ASTs. | 🔴 **Hard** | 8/10 |
+| [**Slab Allocator**](./slab_allocator) | Efficient fixed-size memory management with slab allocator | 🔴 **Hard** | 2/10 |
+| [**Struct Compiler (Hard)**](./struct_compiler_hard) | Compile complex structs with nested types and alignment. | 🔴 **Hard** | 8/10 |
 
 \* Exam Relevance does NOT refer to how likely the exercise is to appear on an exam, but rather how important the underlying concepts are for exam preparation.
 
