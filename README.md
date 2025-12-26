@@ -8,12 +8,13 @@ This repository contains a collection of systems programming exercises designed 
 
 | Exercise | Description | Difficulty | Exam Relevance\* |
 | :--- | :--- | :--- | :--- |
-| [**LEA**](./lea) | Simulate the LEA x86 instruction. | 🟢 **Easy** | 7/10 |
 | [**Permission checker**](./permission_checker) | Validate permission of virtual memory accesses. | 🟢 **Easy** | 9/10 |
 | [**Struct Compiler (Easy)**](./struct_compiler_easy) | Compute offset and size for simple structs. | 🟢 **Easy** | 9/10 |
+| [**LEA**](./lea) | Simulate the LEA x86 instruction. | 🟢 **Easy** | 7/10 |
 | [**Vector**](./vector) | Implementation of a dynamic array (vector) with resizing logic. | 🟡 **Medium** | 6/10 |
 | [**Linked List**](./linked_list) | Basic pointer manipulation and node management for linear structures. | 🟡 **Medium** | 6/10 |
 | [**Backtrace**](./backtrace) | Manual x86_64 stack unwinding using frame pointers and debug symbols. | 🟡 **Medium** | 8/10 |
+| [**Bloom Filter**](./bloom_filter) | Probabilistic data structure for set membership testing. | 🟡 **Medium** | 7/10 |
 | [**Slab Allocator**](./slab_allocator) | Efficient fixed-size memory management with slab allocator | 🔴 **Hard** | 2/10 |
 | [**Struct Compiler (Hard)**](./struct_compiler_hard) | Compile complex structs with nested types and alignment. | 🔴 **Hard** | 8/10 |
 | [**Merkle Tree**](./merkle_tree) | Construct and verify Merkle trees over arbitrary buffers. | 🔴 **Hard** | 5/10 |
