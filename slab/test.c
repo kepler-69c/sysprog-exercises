@@ -165,7 +165,7 @@ TEST test_many_slabs_per_cache() {
 
 TEST test_aligned_alloc_failure_handling() {
   slab_allocator_t *alloc = slab_allocator_create();
-  slab_cache_t *cache = slab_cache_create(alloc, 16, 8);
+  slab_cache_create(alloc, 16, 8);
 
   slab_allocator_free(alloc);
   PASS();
@@ -283,9 +283,9 @@ TEST test_free_list_integrity() {
   slab_allocator_t *alloc = slab_allocator_create();
   slab_cache_t *cache = slab_cache_create(alloc, 32, 32);
 
-  void *p1 = slab_alloc(cache);
+  slab_alloc(cache);
   void *p2 = slab_alloc(cache);
-  void *p3 = slab_alloc(cache);
+  slab_alloc(cache);
 
   slab_free(cache, p2);
   void *p2_new = slab_alloc(cache);
@@ -420,9 +420,9 @@ TEST test_partial_list_persistence() {
   slab_allocator_t *alloc = slab_allocator_create();
   slab_cache_t *cache = slab_cache_create(alloc, 1024, 8);
 
-  void *p1 = slab_alloc(cache);
+  slab_alloc(cache);
   void *p2 = slab_alloc(cache);
-  void *p3 = slab_alloc(cache);
+  slab_alloc(cache);
 
   slab_free(cache, p2);
   void *p4 = slab_alloc(cache);

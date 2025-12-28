@@ -11,7 +11,7 @@
 typedef uint8_t scale_t;
 typedef int32_t displacement_t;
 
-enum reg : uint8_t {
+enum reg {
   REG_RAX = 0U,
   REG_RCX,
   REG_RDX,

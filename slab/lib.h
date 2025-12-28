@@ -14,7 +14,7 @@ typedef struct slab_cache slab_cache_t;
 /**
  * Slabs should be allocated in PAGE_SIZE chunks.
  */
-static inline const size_t PAGE_SIZE = 4096;
+static const size_t PAGE_SIZE = 4096;
 
 slab_allocator_t *slab_allocator_create(void);
 void slab_allocator_free(slab_allocator_t *allocator);

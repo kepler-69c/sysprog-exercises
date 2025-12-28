@@ -34,12 +34,14 @@ struct field_info *make_field_info(enum type t) {
                         sizeof(struct field_info),                   \
           .fields = (struct field_info[]){__VA_ARGS__}}})
 
+// Nasty :(
+static struct field_info array_elem_value = {0};
+
 static inline struct field_info make_array(struct field_info elem, size_t len) {
-  struct field_info *elem_ptr = make_field_infos(1);
-  *elem_ptr = elem;
+  array_elem_value = elem;
   struct field_info arr;
   arr.type = FIELD_TYPE_ARRAY;
-  arr.array_info.element_type = elem_ptr;
+  arr.array_info.element_type = &array_elem_value;
   arr.array_info.length = len;
   return arr;
 }
@@ -869,21 +871,21 @@ TEST test32(void) {
 }
 
 TEST test33(void) {
-  typedef struct {
-  } empty_t;
-
   struct test33 {
-    empty_t empty;
-    int x;
+    int a;
+    float b;
+    double c;
+    char d;
   };
-
-  struct field_info info = STRUCT(STRUCT(), SIMPLE(FIELD_TYPE_INT));
-
+  struct field_info info =
+      STRUCT(SIMPLE(FIELD_TYPE_INT), SIMPLE(FIELD_TYPE_FLOAT),
+             SIMPLE(FIELD_TYPE_DOUBLE), SIMPLE(FIELD_TYPE_CHAR));
   size_t size = compile(&info);
   ASSERT_EQ(sizeof(struct test33), size);
-  ASSERT_EQ(offsetof(struct test33, empty), info.struct_info.fields[0].offset);
-  ASSERT_EQ(offsetof(struct test33, x), info.struct_info.fields[1].offset);
-
+  ASSERT_EQ(offsetof(struct test33, a), info.struct_info.fields[0].offset);
+  ASSERT_EQ(offsetof(struct test33, b), info.struct_info.fields[1].offset);
+  ASSERT_EQ(offsetof(struct test33, c), info.struct_info.fields[2].offset);
+  ASSERT_EQ(offsetof(struct test33, d), info.struct_info.fields[3].offset);
   PASS();
 }
 

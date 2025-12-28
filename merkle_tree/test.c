@@ -173,7 +173,7 @@ TEST test_large_tree_power_of_two() {
   PASS();
 }
 
-TEST test_varying_bytes(int n_bytes) {
+TEST test_varying_bytes(size_t n_bytes) {
   uint8_t *data = malloc(n_bytes);
   memset(data, (uint8_t)n_bytes, n_bytes);
 
@@ -221,6 +221,7 @@ TEST test_determinism() {
     merkle_tree_free(treeN_on_original);
     merkle_tree_free(treeN);
   }
+  PASS();
 }
 
 SUITE(merkle_tree_suite) {

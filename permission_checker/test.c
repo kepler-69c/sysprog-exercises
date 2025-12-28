@@ -104,7 +104,7 @@ TEST test_offset_preservation() {
   pt.entries[0x20] = (1 << 12) | (1 << 13) | 0x50;
   for (int i = 0; i < 256; i++) {
     access_memory(&pt, (0x20 << 8) | i, READ, &physical_address);
-    ASSERT_EQ((0x50 << 8) | i, physical_address);
+    ASSERT_EQ((pa_t)(0x50 << 8) | i, physical_address);
   }
   PASS();
 }

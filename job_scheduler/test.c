@@ -37,6 +37,7 @@ static int validate_schedule(size_t n, size_t m, const job_dependency_t *deps,
 
 TEST test_empty_input() {
   job_id_t *res = schedule_jobs(0, 0, NULL);
+  free(res);
   PASS();
 }
 

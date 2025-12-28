@@ -32,7 +32,7 @@ Your parser must support a subset of x86_64 AT&T syntax. For this exercise, assu
 You are provided abstractions over registers and their values during execution:
 ```c
 
-enum reg : uint8_t {
+enum reg {
   REG_RAX = 0U,
   REG_RCX,
   REG_RDX,

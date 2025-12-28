@@ -15,7 +15,7 @@ struct function {
   size_t stack_size;
 };
 
-#define STACK_SIZE 512
+#define STACK_SIZE 4096
 
 void *allocate_stack(struct function *funcs, size_t func_count,
                      void **initial_rbp) {
@@ -28,7 +28,7 @@ void *allocate_stack(struct function *funcs, size_t func_count,
   if (!stack) {
     return NULL;
   }
-  void *current_sp = (char *)stack + STACK_SIZE;
+  uint8_t *current_sp = (uint8_t *)stack + STACK_SIZE;
   void *current_rbp = NULL;
   for (int i = 0; i < (int)func_count; ++i) {
     struct function *func = &funcs[i];
@@ -39,6 +39,7 @@ void *allocate_stack(struct function *funcs, size_t func_count,
     memcpy(current_sp, &current_rbp, 8);  // previous RBP
     current_rbp = current_sp;
     current_sp -= frame_size;
+    current_sp = (uint8_t *)((uintptr_t)current_sp & ~0xF);
   }
   if (initial_rbp) {
     *initial_rbp = current_rbp;
@@ -81,6 +82,9 @@ void run_test(char *outbuf, size_t outbuf_sz, struct function *funcs,
   fseek(output, 0, SEEK_SET);
   size_t total_read = fread(outbuf, 1, outbuf_sz - 1, output);
   outbuf[total_read] = '\0';
+
+  fclose(output);
+  free(stack);
 }
 
 TEST test1(void) {

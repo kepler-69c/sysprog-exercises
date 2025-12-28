@@ -95,7 +95,7 @@ static inline void __print_type(struct field_info *info, int depth) {
       break;
   }
   printf(";\n");
-};
+}
 static inline void print_type(struct field_info *info) {
   __print_type(info, 0);
 }
