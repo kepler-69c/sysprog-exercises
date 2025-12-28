@@ -13,7 +13,8 @@ This repository contains a collection of systems programming exercises designed 
 | [**Struct Compiler (Easy)**](./struct_compiler_easy) | Compute offset and size for simple structs. | 🟢 **Easy** | 9/10 |
 | [**LEA**](./lea) | Simulate the LEA x86 instruction. | 🟢 **Easy** | 7/10 |
 | [**Vector**](./vector) | Implementation of a dynamic array (vector) with resizing logic. | 🟡 **Medium** | 6/10 |
-| [**Linked List**](./linked_list) | Basic pointer manipulation and node management for linear structures. | 🟡 **Medium** | 6/10 |
+| [**Linked List**](./linked_list) | Basic pointer manipulation and node management for linear structures. | 🟡 **Medium** | 7/10 |
+| [**Hash Map**](./hashmap) | Hash map with collision resolution using separate chaining. | 🟡 **Medium** | 8/10 |
 | [**Backtrace**](./backtrace) | Manual x86_64 stack unwinding using frame pointers and debug symbols. | 🟡 **Medium** | 8/10 |
 | [**MLPQ scheduler**](./mlpq_scheduler) | Efficient multi-level priority queue scheduler with O(1) operations. | 🟡 **Medium** | 7/10 |
 | [**Bloom Filter**](./bloom_filter) | Probabilistic data structure for set membership testing. | 🟡 **Medium** | 7/10 |
