@@ -3,6 +3,8 @@ mdr.c
 */test
 */check
 
+.gdb_history
+
 # Build artifacts
 *.o
 *.obj
