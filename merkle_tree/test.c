@@ -18,11 +18,12 @@ TEST test_single_byte_tree() {
   uint8_t data = 0xAA;
   merkle_tree_t *tree = merkle_tree_create(&data, 1);
   ASSERT(tree != NULL);
-  ASSERT(tree->root != NULL);
-  ASSERT(tree->root->is_leaf);
-  ASSERT_EQ(1, tree->root->size);
-  ASSERT_EQ(1, tree->root->subtree_bytes);
 
+  // Real-life test: Don't check internal 'is_leaf'.
+  // Check if the tree reports the correct total size.
+  ASSERT_EQ(1, merkle_tree_size(tree));
+
+  // Real-life test: Check the hash correctness directly
   hash_t expected = hash(&data, 1);
   ASSERT_EQ(expected, merkle_tree_root_hash(tree));
 
@@ -35,8 +36,11 @@ TEST test_full_block_tree() {
   memset(data, 0xBB, BLOCK_SIZE);
   merkle_tree_t *tree = merkle_tree_create(data, BLOCK_SIZE);
 
-  ASSERT(tree->root->is_leaf);
-  ASSERT_EQ(BLOCK_SIZE, tree->root->size);
+  ASSERT(tree != NULL);
+  ASSERT_EQ(BLOCK_SIZE, merkle_tree_size(tree));
+
+  // Verify self-integrity
+  ASSERT(merkle_tree_verify(tree, data, BLOCK_SIZE));
 
   merkle_tree_free(tree);
   PASS();
@@ -48,10 +52,8 @@ TEST test_two_blocks_even() {
   memset(data + BLOCK_SIZE, 0x02, BLOCK_SIZE);
 
   merkle_tree_t *tree = merkle_tree_create(data, BLOCK_SIZE * 2);
-  ASSERT(!tree->root->is_leaf);
-  ASSERT(tree->root->left->is_leaf);
-  ASSERT(tree->root->right->is_leaf);
 
+  // Calculate expected hash manually to verify tree structure logic
   hash_t h1 = hash(data, BLOCK_SIZE);
   hash_t h2 = hash(data + BLOCK_SIZE, BLOCK_SIZE);
   hash_t expected = combine_hash(h1, h2);
@@ -66,7 +68,7 @@ TEST test_three_blocks_odd() {
   memset(data, 0xCC, sizeof(data));
 
   merkle_tree_t *tree = merkle_tree_create(data, sizeof(data));
-  ASSERT(tree->root->subtree_bytes == sizeof(data));
+  ASSERT_EQ(sizeof(data), merkle_tree_size(tree));
 
   merkle_tree_free(tree);
   PASS();
@@ -97,20 +99,23 @@ TEST test_verify_negative() {
   PASS();
 }
 
-TEST test_rehash_after_mutation() {
+TEST test_update_and_rehash() {
   uint8_t data[BLOCK_SIZE * 2];
   memset(data, 0xAA, sizeof(data));
 
   merkle_tree_t *tree = merkle_tree_create(data, sizeof(data));
-  hash_t old_root = merkle_tree_root_hash(tree);
+  hash_t original_root = merkle_tree_root_hash(tree);
 
-  uint8_t *internal_data = (uint8_t *)tree->root->left->block;
-  internal_data[0] ^= 0x01;
+  // Modify data
+  data[BLOCK_SIZE + 10] = 0xBB;
 
+  ASSERT_FALSE(merkle_tree_verify(tree, data, sizeof(data)));
   merkle_tree_rehash(tree);
-  hash_t new_root = merkle_tree_root_hash(tree);
+  ASSERT(merkle_tree_verify(tree, data, sizeof(data)));
 
-  ASSERT(old_root != new_root);
+  hash_t new_root = merkle_tree_root_hash(tree);
+  ASSERT_NEQ(original_root, new_root);
+
   merkle_tree_free(tree);
   PASS();
 }
@@ -165,8 +170,8 @@ TEST test_large_tree_power_of_two() {
   uint8_t *data = calloc(1, size);
   merkle_tree_t *tree = merkle_tree_create(data, size);
 
-  ASSERT(tree->root != NULL);
-  ASSERT_EQ(size, tree->root->subtree_bytes);
+  ASSERT(tree != NULL);
+  ASSERT_EQ(size, merkle_tree_size(tree));
 
   merkle_tree_free(tree);
   free(data);
@@ -179,7 +184,7 @@ TEST test_varying_bytes(size_t n_bytes) {
 
   merkle_tree_t *tree = merkle_tree_create(data, n_bytes);
   ASSERT(tree != NULL);
-  ASSERT_EQ(n_bytes, tree->root->subtree_bytes);
+  ASSERT_EQ(n_bytes, merkle_tree_size(tree));
 
   ASSERT(merkle_tree_verify(tree, data, n_bytes));
 
@@ -195,7 +200,7 @@ TEST test_varying_blocks(int n_blocks) {
 
   merkle_tree_t *tree = merkle_tree_create(data, size);
   ASSERT(tree != NULL);
-  ASSERT_EQ(size, tree->root->subtree_bytes);
+  ASSERT_EQ(size, merkle_tree_size(tree));
 
   ASSERT(merkle_tree_verify(tree, data, size));
 
@@ -232,7 +237,7 @@ SUITE(merkle_tree_suite) {
   RUN_TEST(test_three_blocks_odd);
   RUN_TEST(test_verify_positive);
   RUN_TEST(test_verify_negative);
-  RUN_TEST(test_rehash_after_mutation);
+  RUN_TEST(test_update_and_rehash);
   RUN_TEST(test_diff_identical);
   RUN_TEST(test_diff_first_block);
   RUN_TEST(test_diff_second_block);

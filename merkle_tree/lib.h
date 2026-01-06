@@ -10,25 +10,7 @@
 
 typedef uint64_t hash_t;
 
-typedef struct merkle_tree_node {
-  bool is_leaf;
-  hash_t hash;
-  size_t subtree_bytes;
-  union {
-    struct {  // Leaf
-      const void *block;
-      size_t size;
-    };
-    struct {  // Inner
-      struct merkle_tree_node *left;
-      struct merkle_tree_node *right;
-    };
-  };
-} merkle_tree_node_t;
-
-typedef struct {
-  merkle_tree_node_t *root;
-} merkle_tree_t;
+typedef struct merkle_tree merkle_tree_t;
 
 static inline hash_t hash(const void *data, size_t size) {
   const unsigned char *p = (const unsigned char *)data;
@@ -57,6 +39,10 @@ hash_t merkle_tree_root_hash(merkle_tree_t *tree);
  * Recompute all hashes in the Merkle tree.
  */
 void merkle_tree_rehash(merkle_tree_t *tree);
+/**
+ * Return the size in bytes of the data represented by the Merkle tree.
+ */
+size_t merkle_tree_size(const merkle_tree_t *tree);
 
 /**
  * Return the byte offset of the first differing *block* between two Merkle
