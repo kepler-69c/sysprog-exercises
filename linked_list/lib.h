@@ -57,6 +57,9 @@ static inline void list_free(list_t *list) {
   free(list);
 }
 
+/**
+ * @note this function won't catch cycles
+ */
 static inline void list_sanity_check(list_t *list) {
   if (list->head == NULL && list->tail == NULL) {
     return;
