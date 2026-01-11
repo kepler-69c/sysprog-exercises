@@ -6,7 +6,7 @@ This repository contains a collection of systems programming exercises designed 
 
 ## Exercise Directory
 
-| Exercise | Description | Difficulty | Relevant topics \* | Solved |
+| Exercise | Description | Difficulty | Relevant topics \* | Solutions |
 | :--- | :--- | :--- | :--- | :-: |
 | [**Endianness Swapper**](./endianness) | Convert integers between Little and Big Endian formats. | 🟢 **Easy** | Bitwise operations, Memory layout | ✔ |
 | [**fpclassify**](./fpclassify) | Classify floating-point numbers into categories (normal, subnormal, zero, infinite, NaN). | 🟢 **Easy** | Floating-point numbers, Bitwise operations | ✔ |
@@ -17,10 +17,10 @@ This repository contains a collection of systems programming exercises designed 
 | [**LEA**](./lea) | Simulate the LEA x86 instruction. | 🟢 **Easy** | x86 assembly |
 | [**Vector**](./vector) | Implementation of a dynamic array (vector) with resizing logic. | 🟡 **Medium** | Memory management, Implementation | ✔ |
 | [**Linked List**](./linked_list) | Basic pointer manipulation and node management for linear structures. | 🟡 **Medium** | Pointers, Implementation | ✔ |
-| [**Hash Map**](./hashmap) | Hash map with collision resolution using separate chaining. | 🟡 **Medium** | Pointers, Hashing, Implementation |
-| [**Backtrace**](./backtrace) | Manual x86_64 stack unwinding using frame pointers and debug symbols. | 🟡 **Medium** | x86 assembly, Calling conventions |
-| [**MLPQ scheduler**](./mlpq_scheduler) | Efficient multi-level priority queue scheduler with O(1) operations. | 🟡 **Medium** | Bitwise operations, Implementation |
-| [**Bloom Filter**](./bloom_filter) | Probabilistic data structure for set membership testing. | 🟡 **Medium** | Bitwise operations, Implementation |
+| [**Hash Map**](./hashmap) | Hash map with collision resolution using separate chaining. | 🟡 **Medium** | Pointers, Hashing, Implementation | ✔ |
+| [**Backtrace**](./backtrace) | Manual x86_64 stack unwinding using frame pointers and debug symbols. | 🟢 **Easy** | x86 assembly, Calling conventions | ✔ |
+| [**MLPQ scheduler**](./mlpq_scheduler) | Efficient multi-level priority queue scheduler with O(1) operations. | 🟡 **Medium** | Bitwise operations, Implementation | ✔ |
+| [**Bloom Filter**](./bloom_filter) | Probabilistic data structure for set membership testing. | 🟡 **Medium** | Bitwise operations, Implementation | ✔ |
 | [**Job Scheduler**](./job_scheduler) | Order jobs based on dependencies using topological sorting. | 🟡 **Medium** | Implementation |
 | [**Struct Compiler (Hard)**](./struct_compiler_hard) | Compile complex structs with nested types and alignment. | 🔴 **Hard** | Memory layout, Implementation |
 | [**Slab Allocator**](./slab) | Efficient fixed-size memory management with slab allocator | 🔴 **Hard** | Memory management, Implementation |
